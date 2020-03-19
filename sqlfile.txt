@@ -1,0 +1,10 @@
+INSERT INTO myTable((",".join(row))) VALUES 
+('(row[0])','(row[1])','(row[2])','(row[3])') , 
+('(row[0])','(row[1])','(row[2])','(row[3])') , 
+('(row[0])','(row[1])','(row[2])','(row[3])') , 
+('(row[0])','(row[1])','(row[2])','(row[3])') , 
+INSERT INTO myTable((",".join(row))) VALUES 
+(' (row[0])','(row[1])','(row[2])','(row[3])'), 
+(' (row[0])','(row[1])','(row[2])','(row[3])'), 
+(' (row[0])','(row[1])','(row[2])','(row[3])'), 
+(' (row[0])','(row[1])','(row[2])','(row[3])'), 
