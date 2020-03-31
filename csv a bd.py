@@ -3,8 +3,8 @@ import pandas as pd
 #variables para la conexion
 direccion_servidor = 'Cobartram016\TRABDSP10'
 nombre_bd = 'BDVIAJE2'
-nombre_usuario = ''
-password = ''
+nombre_usuario = 'tra-sap'
+password = '12345.TS'
 
 #validador de conexion
 try:
@@ -36,37 +36,22 @@ prueba=df["Email"][1]
 #variable de columnas de la base de datos
 colss='correo','id_company','nombres','apellidos','extension','celular','puesto','pagina_web','ciudad','departamento','area','pais','codigo_postal'
 
-#variable contadora
-d=0
+
 for i,row in df.iterrows():
         try:
             sql = "INSERT INTO  DC_Usuarios (correo, id_company, nombres,apellidos,extension,celular,puesto,pagina_web,ciudad,departamento,area,pais,codigo_postal) VALUES (" + "?,"*(len(row)-1) + "?)" 
             #print(sql)
-            #print(tuple(row))
-            print("inserto")
+            print(tuple(row))
             cursor.execute(sql, tuple(row))
-            d=d+1
+
     
         except Exception as e:
             cursor.execute("SELECT top 1 * FROM DC_Usuarios")
             columnas =cursor.description
-            cols = [col[0] for col in columnas]  
-            company=(df["Id_Company"][d])
-            name=(df["Nombre"][d])
-            lastname=(df["Apellido"][d])
-            ext=(df["TelExt"][d])
-            cellphone=(df["CelEmp"][d])
-            Business_position=(df["NomCargo"][d])
-            pag=(df["Pagina Web"][d])
-            city=(df["Ciudad"][d])
-            Department=(df["Departamento"][d])
-            Namecc=(df["NomCC"][d])
-            country=(df["Pais"][d])
-            Postal_Code=(df["Codigo postal"][d])
-            email=(df["Email"][d])
-          
+            cols = [col[0] for col in columnas]
+            aux=list(row[1:])
+            aux.append(row[0])
             update= "UPDATE DC_Usuarios set ["+']=?,['.join(cols[1:])+"]=? where ["+cols[0]+"]=?"
-            cursor.execute(update,int(company),name,lastname,int(ext),int(cellphone),Business_position,pag,city,Department,Namecc,country,int(Postal_Code),email)
-            print(d)
-            d=d+1
+            cursor.execute(update,tuple(aux))
             #print(Postal_Code)
+            #print(aux)
